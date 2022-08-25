@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-const Navbar = ({ lang, setLangs }) => {
+const Navbar = ({ lang, setLangs, auth, isAuth }) => {
    return (
       <>
+
+<ToastContainer />
          {/* <!-- Navbar --> */}
          <nav className="navbar navbar-expand-lg navbar-light bg-light">
             {/* <!-- Container wrapper --> */}
@@ -34,23 +37,36 @@ const Navbar = ({ lang, setLangs }) => {
                      />
                   </a>
                   {/* <!-- Left links --> */}
-                  <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                     <li className="nav-item">
-                        <NavLink to="/" className={({ isActive }) => isActive ? "fw-bold text-primary nav-link" : "nav-link"}>
-                           {lang.Dashboard}
-                        </NavLink>
-                     </li>
-                     <li className="nav-item">
-                        <NavLink to="/team" className={({ isActive }) => isActive ? "fw-bold text-primary nav-link" : "nav-link"}>
-                           {lang.Team}
-                        </NavLink>
-                     </li>
-                     <li className="nav-item">
-                        <NavLink to="/projects" className={({ isActive }) => isActive ? "fw-bold text-primary nav-link" : "nav-link"}>
-                           {lang.Projects}
-                        </NavLink>
-                     </li>
-                  </ul>
+                  {
+                     auth ? <>
+
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                           <li className="nav-item">
+                              <NavLink to="/" className={({ isActive }) => isActive ? "fw-bold text-primary nav-link" : "nav-link"}>
+                                 {lang.Dashboard}
+                              </NavLink>
+                           </li>
+                           <li className="nav-item">
+                              <NavLink to="/team" className={({ isActive }) => isActive ? "fw-bold text-primary nav-link" : "nav-link"}>
+                                 {lang.Team}
+                              </NavLink>
+                           </li>
+                           <li className="nav-item">
+                              <NavLink to="/projects" className={({ isActive }) => isActive ? "fw-bold text-primary nav-link" : "nav-link"}>
+                                 {lang.Projects}
+                              </NavLink>
+                           </li>
+                        </ul>
+
+                     </>
+
+                        :
+
+
+                        " "
+                  }
+
+
                   {/* <!-- Left links --> */}
                </div>
                {/* <!-- Collapsible wrapper --> */}
@@ -119,8 +135,21 @@ const Navbar = ({ lang, setLangs }) => {
                         <li>
                            <a className="dropdown-item" href="#">{lang.settings}</a>
                         </li>
-                        <li>
-                           <a className="dropdown-item" href="#">{lang.Logout}</a>
+                        <li >
+                           <a onClick={() => {
+                              return(
+                                 toast.info('log out',{
+                                    position: "top-right",
+                                    autoClose: 1000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    }),
+                                 isAuth(false)
+                              )
+                           }} className="dropdown-item" href="#">{lang.Logout}</a>
                         </li>
                      </ul>
                   </div>
