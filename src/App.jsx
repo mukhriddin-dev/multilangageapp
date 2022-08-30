@@ -9,13 +9,14 @@ import Projects from "./components/Projects/Projects";
 import Error from "./components/404/Error";
 import Login from "./components/login/Login";
 import Private from "./private/Private";
-
+import userdata from "./api/user";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [langs, setLangs] = useState("en");
   const [auth, setAuth] = useState(false);
+const [users,setUsers]=useState([]);
 
 
   const user = {
@@ -23,6 +24,17 @@ const App = () => {
     password: "123",
   };
 
+
+ const fetchData=async()=>{
+   const data=await userdata.superadmin();
+   setUsers(data.data)
+ }
+  
+ useEffect(()=>{
+   fetchData()
+ },[])
+
+ console.log(users);
 
   const useAuth = (username, password, check) => {
 
@@ -107,3 +119,5 @@ const App = () => {
 };
 
 export default App;
+
+// npx start json-server --watch src/DB/db.json --port 8080

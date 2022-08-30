@@ -1,0 +1,17 @@
+{
+   "uzbek-admin": {
+      "role": 200,
+      "password": "uzbek-admin",
+      "username": "uzbekadmin"
+   },
+   "xitoy-admin": {
+      "role": 300,
+      "password": "xitoy-admin",
+      "username": "xitoyadmin"
+   },
+   "super-admin": {
+      "role": 100,
+      "password": "super-admin",
+      "username": "superadmin"
+   }
+}

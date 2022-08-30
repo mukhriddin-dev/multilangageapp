@@ -6,7 +6,6 @@ import Login from '../components/login/Login';
 
 const Private = ({isAuth, auth}) => {
 
-   console.log(auth);
    
 
    return (
